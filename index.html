@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I am always angry</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            overflow: hidden;
+            user-select: none;
+        }
+        body {
+            background: #555;
+        }
+        .img, .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .img img {
+            border-radius: 10px;
+        }
+        .next, .previous {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+            border-radius: 0 8px 8px 0;
+            color: rgba(255, 255, 255, 0.521);
+            transform: scaleY(3);
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .previous {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .next:hover, .previous:hover {
+            background: rgba(0, 0, 0, 0.1);
+            transition: .5s;
+            color: white;
+        }
+
+        .btn button {
+            border: none;
+            outline: none;
+            background: #0bd4c4;
+            display: inline-block;
+            width: 150px;
+            height: 50px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .btn button:hover{
+            box-shadow: inset 1px 1px 5px black;
+        }
+        .btn button:active {
+            transform: scale(0.97);
+            box-shadow: none;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- =========================================================================== -->
+    <div class="img">
+        <div class="previous" onclick="previous()"><</div>
+        <img src="img/Screenshot (98).png" id="next" width="80%">
+        <div class="next" onclick="next()">></div>
+    </div>
+    <div class="btn">
+        <button onclick="play()" id="playPause">Play</button>
+    </div>
+    
+
+
+
+
+
+    <!-- ============================================================================== -->
+    <script>
+        var image = document.getElementById('next');
+        var counter = 98;
+        var video = 0;
+
+        function next() {
+            if(counter >= 209){
+                counter = 97;
+            }
+            counter++;
+            var imageCounter = 'img/Screenshot ('+ counter +').png';
+            image.src = imageCounter;
+        }
+
+        function previous() {
+            if(counter <= 98){
+                counter = 210;
+            }
+            counter--;
+            imageCounter = 'img/Screenshot ('+ counter +').png';
+            image.src = imageCounter;
+        }
+
+        let videoPlay;
+
+        function play(){
+            if(video===0) {
+                videoPlay = setInterval(next,150);
+                document.getElementById('playPause').innerHTML = 'Pause';
+                video = 1;
+            }else if(video===1){
+                clearInterval(videoPlay);
+                document.getElementById('playPause').innerHTML = 'Play';
+                video = 0;
+            }
+        }
+
+    </script>
+</body>
+</html>
